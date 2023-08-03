@@ -14,9 +14,7 @@ This project uses Vite, React, TypeScript, and Styled Components.
 
 ## Building
 
-To build the project for production, run:
-
-npm run build
+To build the project for production, run: `npm run build`
 
 
 The built files will be in the `dist` directory.
