@@ -67,6 +67,8 @@ function Autocomplete({ value, request, onChange }: IAutocompleteProps) {
     }
   };
 
+  console.log(isLoading);
+
   useEffect(() => {
     onChange(searchValue);
   }, [searchValue, onChange]);
