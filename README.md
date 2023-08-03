@@ -1,27 +1,56 @@
-# React + TypeScript + Vite
+# Autocomplete
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project uses Vite, React, TypeScript, and Styled Components.
 
-Currently, two official plugins are available:
+## Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Install the dependencies:
 
-## Expanding the ESLint configuration
+npm install
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- Configure the top-level `parserOptions` property like this:
+2. Run the development server:
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+npm run dev
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+3. Open `localhost:3000` in your browser.
+
+## Building
+
+To build the project for production, run:
+
+npm run build
+
+
+The built files will be in the `dist` directory.
+
+## Deploying
+
+To deploy the project, run:
+
+npm run deploy
+
+
+The project will be deployed to GitHub Pages. The deployed URL is:
+
+https://maxkharena.github.io/autocomplete/
+
+
+## Other commands
+
+* `npm run lint`: Run the linter.
+* `npm run test`: Run the tests.
+
+## Credits
+
+This project uses the following open source libraries:
+
+* Vite
+* React
+* TypeScript
+* Styled Components
+
+## License
+
+This project is licensed under the MIT License.
