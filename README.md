@@ -23,9 +23,7 @@ The built files will be in the `dist` directory.
 
 ## Deploying
 
-To deploy the project, run:
-
-npm run deploy
+To deploy the project, run: `npm run deploy`
 
 
 The project will be deployed to GitHub Pages. The deployed URL is:
