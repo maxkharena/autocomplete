@@ -4,14 +4,10 @@ This project uses Vite, React, TypeScript, and Styled Components.
 
 ## Getting Started
 
-1. Install the dependencies:
-
-`npm install`
+1. Install the dependencies: `npm install`
 
 
-2. Run the development server:
-
-`npm run dev`
+2. Run the development server: `npm run dev`
 
 
 3. Open `localhost:3000` in your browser.
