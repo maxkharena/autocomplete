@@ -1,8 +1,9 @@
 // Absolute imports
-import { useRef, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 // Styles
 import {
+  Loader,
   Wrapper,
   SearchInput,
   SuggestionList,
@@ -11,7 +12,7 @@ import {
 } from './Autocomplete.styles';
 
 // Hooks
-import useAsyncFilter from '../hooks/useAsyncFilter';
+import { useAsyncFilter, useOutsideClick } from '../hooks';
 
 // Types
 import { ISuggestionItem } from '../api';
@@ -25,9 +26,7 @@ interface IAutocompleteProps {
 function Autocomplete({ value, request, onChange }: IAutocompleteProps) {
   const [focusedItemIndex, setFocusedIndex] = useState(-1);
   const [searchValue, setSearchValue] = useState(value || '');
-  const [showSuggestions, setShowSuggestion] = useState(false);
-
-  const wrapperRef = useRef(null);
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
   const { isLoading, suggestions } = useAsyncFilter(request, searchValue);
 
@@ -37,15 +36,22 @@ function Autocomplete({ value, request, onChange }: IAutocompleteProps) {
 
   const handleSelectSuggestion = (text: string) => {
     setSearchValue(text);
-    setShowSuggestion(false);
+    setShowSuggestions(false);
   };
 
   const handleInputClick = () => {
     setFocusedIndex(-1);
-    setShowSuggestion(true);
+    setShowSuggestions(true);
   };
 
+  const handleClickOutside = () => {
+    setFocusedIndex(-1);
+    setShowSuggestions(false);
+  }
+
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    setShowSuggestions(true);
+
     switch (event.key) {
       case 'ArrowDown':
         event.preventDefault();
@@ -59,7 +65,9 @@ function Autocomplete({ value, request, onChange }: IAutocompleteProps) {
         event.preventDefault();
         if (focusedItemIndex > -1 && suggestions) {
           setSearchValue(suggestions[focusedItemIndex].name);
-          setShowSuggestion(false);
+          setShowSuggestions(false);
+        } else {
+          setFocusedIndex(0);
         }
         break;
       default:
@@ -67,12 +75,11 @@ function Autocomplete({ value, request, onChange }: IAutocompleteProps) {
     }
   };
 
-  console.log(isLoading);
-
   useEffect(() => {
     onChange(searchValue);
   }, [searchValue, onChange]);
 
+  const wrapperRef = useOutsideClick(handleClickOutside);
   return (
     <Wrapper ref={wrapperRef}>
       <SearchInput
@@ -84,13 +91,13 @@ function Autocomplete({ value, request, onChange }: IAutocompleteProps) {
         onChange={handleSearchChange}
         placeholder="Type to search..."
       />
+      {isLoading ? <Loader /> : null}
       {suggestions.length !== 0 && searchValue ?
         <SuggestionPlaceholder
           disabled
           type="text"
           tabIndex={-1}
           placeholder=""
-          autoComplete="off"
           value={`${searchValue}${suggestions[0].name.substring(searchValue.length)}`}
         /> : null}
       {showSuggestions ? (
