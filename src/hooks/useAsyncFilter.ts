@@ -1,8 +1,11 @@
 // Absolute imports
 import { useState, useEffect } from 'react';
-
+ 
 // Types
 import { ISuggestionItem } from '../api';
+
+// Hooks
+import useDebounce from './useDebounce';
 
 // Helpers
 const asyncFilter = (items: ISuggestionItem[], conditionFn: (item: ISuggestionItem) => boolean) =>
@@ -11,6 +14,9 @@ const asyncFilter = (items: ISuggestionItem[], conditionFn: (item: ISuggestionIt
 const useAsyncFilter = (request: () => Promise<ISuggestionItem[]>, searchValue: string) => {
   const [isLoading, setIsLoading] = useState(false);
   const [suggestions, setSuggestions] = useState<ISuggestionItem[]>([]);
+
+  // Avoid request sending while user still typing
+  const value = useDebounce(searchValue, 300);
 
   useEffect(() => {
     // Only proceed if searchValue has length >= 1
@@ -40,7 +46,7 @@ const useAsyncFilter = (request: () => Promise<ISuggestionItem[]>, searchValue: 
       setSuggestions([]);
       setIsLoading(false);
     }
-  }, [searchValue, request]);
+  }, [value, request]);
 
   return {
     isLoading,
