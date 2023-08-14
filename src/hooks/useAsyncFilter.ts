@@ -15,7 +15,7 @@ const useAsyncFilter = (request: () => Promise<ISuggestionItem[]>, searchValue: 
   useEffect(() => {
     // Only proceed if searchValue has length >= 1
     if (searchValue.trim().length >= 1) {
-      const fetchFilteredTodos = async () => {
+      const fetchFilteredFruits = async () => {
         try {
           setIsLoading(true);
 
@@ -34,7 +34,7 @@ const useAsyncFilter = (request: () => Promise<ISuggestionItem[]>, searchValue: 
         }
       };
 
-      fetchFilteredTodos();
+      fetchFilteredFruits();
     } else {
       // If searchValue is empty, reset suggestions and remove loading
       setSuggestions([]);
