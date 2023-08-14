@@ -15,11 +15,11 @@ import {
 import { useAsyncFilter, useOutsideClick } from '../hooks';
 
 // Types
-import { ISuggestionItem } from '../api';
+import { TReadonlySuggestionItem } from '../api';
 
 interface IAutocompleteProps {
   value: string;
-  request: () => Promise<ISuggestionItem[]>;
+  request: (params?: any) => Promise<TReadonlySuggestionItem[]>;
   onChange: (selecteValue: string) => void;
 }
 
@@ -102,7 +102,7 @@ function Autocomplete({ value, request, onChange }: IAutocompleteProps) {
         /> : null}
       {showSuggestions ? (
         <SuggestionList>
-          {suggestions.map(({ id, name }: ISuggestionItem, index: number) => (
+          {suggestions.map(({ id, name }: TReadonlySuggestionItem, index: number) => (
             <SuggestionItem
               key={id}
               focused={index === focusedItemIndex}
